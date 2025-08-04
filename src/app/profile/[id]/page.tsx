@@ -1,4 +1,18 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
+
 export default async function UserProfile({ params }: { params: { id: string } }) {
+
+
+  const cookieStore = await cookies(); // ⬅️ sửa ở đây
+  const token = cookieStore.get("token")?.value;
+
+  if (!token) {
+    redirect("/login");
+  }
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full text-center">
