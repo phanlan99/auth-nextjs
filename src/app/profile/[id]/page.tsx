@@ -1,8 +1,15 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 
-export default function UserProfile({ params }: { params: { id: string } }) {
-  const cookieStore = cookies(); // ✅ hàm sync
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default function UserProfile({ params }: PageProps) {
+  const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
 
   if (!token) {
