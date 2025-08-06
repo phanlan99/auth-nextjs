@@ -1,17 +1,13 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-
-export default async function UserProfile({ params }: { params: { id: string } }) {
-
-
-  const cookieStore = await cookies(); // ⬅️ sửa ở đây
+export default function UserProfile({ params }: { params: { id: string } }) {
+  const cookieStore = cookies(); // ✅ hàm sync
   const token = cookieStore.get("token")?.value;
 
   if (!token) {
     redirect("/login");
   }
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -22,5 +18,5 @@ export default async function UserProfile({ params }: { params: { id: string } }
         </p>
       </div>
     </div>
-  )
+  );
 }
