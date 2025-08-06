@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import React, { useState , useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import toast from "react-hot-toast"
@@ -21,27 +21,27 @@ export default function Loginpage() {
         // Xử lý login tại đây
         try {
             setLoading(true)
-            const response = await axios.post("api/users/login" , user) // gởi qua api login
-            console.log("Login success" , response.data);
+            const response = await axios.post("api/users/login", user) // gởi qua api login
+            console.log("Login success", response.data);
             toast.success("login success")
             router.push("/profile")
-            
+
         } catch (error) {
             console.log(error.message);
             toast.error(error.message)
-            
+
         } finally {
             setLoading(false)
         }
     }
 
     useEffect(() => {
-        if(user.email.length > 0 && user.password.length > 0){
+        if (user.email.length > 0 && user.password.length > 0) {
             setButtonDisable(false)
-        }else {
+        } else {
             setButtonDisable(true)
         }
-    } , [user])
+    }, [user])
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -92,6 +92,12 @@ export default function Loginpage() {
                         Đăng ký
                     </Link>
                 </p>
+                <p className="text-sm text-right mt-2">
+                    <Link href="/forgotpassword" className="text-blue-600 hover:underline">
+                        Forgot Password?
+                    </Link>
+                </p>
+
             </div>
         </div>
     )
